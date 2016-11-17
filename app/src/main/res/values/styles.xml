@@ -1,0 +1,72 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!--
+    apTabIndicatorColor 导航条的颜色
+    apTabUnderlineColor Tab底部下划线的颜色
+    apTabDividerColor 每个Tab之间的分割线颜色
+    apTabstabTextSelectColor 被选中的Tab的文本字体颜色
+    apTabIndicatorHeight 导航条的高度
+    apTabUnderlineHeight Tab底部下划线的高度
+    apTabDividerPadding Tab分割线的padding
+    apTabPaddingLeftRight 每个Tab的左右padding
+    apTabPaddingTopBottom 每个Tab的上下padding
+    apTabScrollOffset 选中tab的滑动offset
+    apTabBackground tab的背景
+    apTabShouldExpand 伸缩情况，如果为真，每个tab都是相同的weight，默认是false
+    apTabTextAllCaps Tab的文字是否为全部大写，如果是true就全部大写，默认为true
+    apTabTextSelectColor 你所选择的那个tab的颜色
+    apTabDrawMode 绘制模式，text或者normal，用于是否将下划线绘制为跟随TextView
+    -->
+    //AdvancedPagerSlidingTabStrip的style
+
+    <style name="weibo_icon_style">
+        <item name="android:background">@drawable/weibo_tab_bg_normal</item>
+        <item name="apTabBackground">@drawable/weibo_tab_bg_normal</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@drawable/tab_color_select</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <!--导航条的颜色-->
+        <item name="apTabIndicatorColor">@color/google_red</item>
+        <!--Tab底部下划线的颜色-->
+        <item name="apTabUnderlineColor">#ff0000</item>
+        <!--每个Tab之间的分割线颜色-->
+        <item name="apTabDividerColor">#00000000</item>
+        <!--缩情况，如果为真，每个tab都是相同的weight，默认是false-->
+        <item name="apTabShouldExpand">false</item>
+        <!--每个Tab的左右padding-->
+        <item name="apTabPaddingLeftRight">8dp</item>
+        <item name="apTabPaddingTopBottom">6dp</item>
+        <!--你所选择的那个tab的颜色-->
+        <item name="apTabTextSelectColor">@color/google_red</item>
+    </style>
+
+    <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="style_textview_one">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+</resources>
