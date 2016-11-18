@@ -11,10 +11,6 @@ import android.widget.RelativeLayout;
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 import com.lhh.apst.library.Margins;
 import com.wst.R;
-import com.wst.four.fragment.FourthFragment;
-import com.wst.one.fragment.FirstFragment;
-import com.wst.three.fragment.ThirdFragment;
-import com.wst.two.fragment.SecondFragment;
 
 /**
  * Created by: BruceChang

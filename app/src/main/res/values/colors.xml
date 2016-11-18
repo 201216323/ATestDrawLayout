@@ -8,4 +8,6 @@
     <!-- tab -->
     <color name="home_bar_text_normal">#ffffff</color>
     <color name="textnormal">#000000</color>
+
+    <color name="home_bar_text_push">#ff5959</color>
 </resources>

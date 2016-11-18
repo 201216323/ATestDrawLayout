@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     //注解开发
     //banner循环轮播
     //底部tab  com.lhh.apst.library.AdvancedPagerSlidingTabStrip
@@ -36,4 +36,6 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 }

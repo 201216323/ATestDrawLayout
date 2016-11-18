@@ -1,4 +1,4 @@
-package com.wst.three.fragment;
+package com.wst.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,16 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wst.main.MainActivity;
 import com.wst.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * to handle interaction events.
- * Use the {@link ThirdFragment#newInstance} factory method to
+ * Use the {@link FourthFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ThirdFragment extends Fragment implements View.OnClickListener {
+public class FourthFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +27,23 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
 
     private MainActivity mActivity;
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment FirstFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static FourthFragment newInstance(String param1, String param2) {
+        FourthFragment fragment = new FourthFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -48,7 +64,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_three, container, false);
+        return inflater.inflate(R.layout.fragment_four, container, false);
     }
 
     @Override
@@ -56,26 +72,8 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
     }
 
-    public ThirdFragment() {
+    public FourthFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FirstFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ThirdFragment newInstance(String param1, String param2) {
-        ThirdFragment fragment = new ThirdFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
 

@@ -13,7 +13,7 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.wst.R;
 import com.wst.main.MainActivity;
-import com.wst.one.adapter.RecyclerViewAdapter;
+import com.wst.one.adapter.FoodDetailAdapter;
 
 import java.util.ArrayList;
 
@@ -21,23 +21,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
- * to handle interaction events.
- * Use the {@link FirstFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by: BruceChang
+ * Date on : 2016/11/18.
+ * Time on: 11:55
+ * Progect_Name:ATestDrawLayout
+ * Source Github：
+ * Description:
  */
-public class FirstFragment extends Fragment implements View.OnClickListener {
+
+public class FoodDetailFragment extends Fragment implements View.OnClickListener {
 
     private MainActivity mActivity;
     @BindView(R.id.recyclerViewFirst)
     XRecyclerView recyclerViewFirst;
-    RecyclerViewAdapter recyclerViewAdapter;
+    FoodDetailAdapter recyclerViewAdapter;
     private ArrayList<String> mData;
     private Handler handler;
 
 
-    public static FirstFragment newInstance(String param1, String param2) {
-        FirstFragment fragment = new FirstFragment();
+    public static FoodDetailFragment newInstance(String param1, String param2) {
+        FoodDetailFragment fragment = new FoodDetailFragment();
         return fragment;
     }
 
@@ -50,7 +53,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        View view = inflater.inflate(R.layout.fragment_food_detail, container, false);
         ButterKnife.bind(this, view);
         initData();
         return view;
@@ -65,7 +68,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private void initData() {
         recyclerViewFirst.setPullRefreshEnabled(false);
         mData = new ArrayList<>();
-        recyclerViewAdapter = new RecyclerViewAdapter(mData);
+        recyclerViewAdapter = new FoodDetailAdapter(mData);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewFirst.setLayoutManager(layoutManager);

@@ -15,10 +15,10 @@ import butterknife.BindView;
 /**
  * Created by hosa2015 on 2016-9-18.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.MyViewHolder> {
     private ArrayList<String> mData;
 
-    public RecyclerViewAdapter(ArrayList<String> mData) {
+    public FoodDetailAdapter(ArrayList<String> mData) {
         this.mData = mData;
     }
 

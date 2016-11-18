@@ -1,4 +1,4 @@
-package com.wst.two.fragment;
+package com.wst.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wst.main.MainActivity;
 import com.wst.R;
 
 /**
@@ -27,7 +26,7 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
     private String mParam2;
 
     private MainActivity mActivity;
-
+    String path;
 
     @Override
     public void onAttach(Context context) {
@@ -47,17 +46,15 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_two, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_two, container, false);
+
+        return view;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    public SecondFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -78,9 +75,15 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
+    public SecondFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public void onClick(View v) {
 
     }
+
+
 }
