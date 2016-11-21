@@ -8,7 +8,7 @@
 
     <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
         android:id="@+id/tabs"
-        style="@style/pagertab_icon_style"
+        style="@style/pagertab_style"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"

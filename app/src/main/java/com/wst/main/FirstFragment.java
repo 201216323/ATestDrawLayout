@@ -27,7 +27,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.wst.main.MainFragmentAdapter.VIEW_FIRST;
-import static com.wst.main.MainFragmentAdapter.VIEW_SIZE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,7 +62,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         ButterKnife.bind(this, view);
 
-        loadData();
+//        loadData();
         init();
         return view;
     }
@@ -104,8 +103,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     private void init() {
         mtitles = new ArrayList<>();
-        mFragmentManager = getFragmentManager();
-        vp_main.setOffscreenPageLimit(VIEW_SIZE);
+        mFragmentManager = getChildFragmentManager();
+        vp_main.setOffscreenPageLimit(3);
         mFoodDetailTabsAdapter = new FoodTabsAdapter(mFragmentManager, mtitles);
         vp_main.setAdapter(mFoodDetailTabsAdapter);
         tabs.setViewPager(vp_main);
