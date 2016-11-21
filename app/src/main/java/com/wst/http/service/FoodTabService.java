@@ -1,21 +1,20 @@
-package com.wst.http;
+package com.wst.http.service;
 
 import com.wst.one.module.FoodTabModule;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-
 /**
- * Created by: BruceChang
- * Date on : 2016/11/18.
- * Time on: 13:57
- * Progect_Name:ATestDrawLayout
- * Source Github：
- * Description:食物详情的页
+ * Created by Administrator
+ * Date:2016/11/21
+ * Time:22:23
+ * Author:BruceChang
+ * Function:
  */
 
 public interface FoodTabService {
+
     @GET("/api/cook/classify")
     Call<FoodTabModule> getFoodTab();
 }

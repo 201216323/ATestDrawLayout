@@ -6,26 +6,12 @@
     android:orientation="vertical"
     tools:context="com.wst.main.FirstFragment">
 
-    <com.lhh.apst.library.AdvancedPagerSlidingTabStrip
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        style="@style/pagertab_icon_style"
-        android:layout_alignParentBottom="true"
-        android:fillViewport="false"/>
-
-    <com.lhh.apst.advancedpagerslidingtabstrip.APSTSViewPager
-        android:id="@+id/vp_main"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@id/tabs"/>
-
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recyclerViewFirst"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:scrollbars="none"
+        android:visibility="visible"
         ></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 </LinearLayout>

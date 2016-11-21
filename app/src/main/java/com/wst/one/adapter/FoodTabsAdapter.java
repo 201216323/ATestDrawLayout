@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by: BruceChang
@@ -19,16 +20,18 @@ public class FoodTabsAdapter extends FragmentStatePagerAdapter {
 
 
     private ArrayList<String> mtitles;
+    private List<Fragment> fragmentList;
+    private int mChildCount;
 
-
-    public FoodTabsAdapter(FragmentManager fm, ArrayList<String> mtitles) {
+    public FoodTabsAdapter(FragmentManager fm, ArrayList<String> mtitles, List<Fragment> fragmentList) {
         super(fm);
         this.mtitles = mtitles;
+        this.fragmentList = fragmentList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        return fragmentList.get(position);
     }
 
     @Override
@@ -39,5 +42,20 @@ public class FoodTabsAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mtitles.get(position);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        mChildCount = getCount();
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemPosition(Object object)   {
+        if ( mChildCount > 0) {
+            mChildCount --;
+            return POSITION_NONE;
+        }
+        return super.getItemPosition(object);
     }
 }
