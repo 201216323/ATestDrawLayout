@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -194,7 +194,8 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
                             recyclerViewFirst.setVisibility(View.GONE);
                             imgNoData.setVisibility(View.VISIBLE);
                         } else {
-                            Toast.makeText(mActivity, "暂无更多", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mActivity, "暂无更多", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(recyclerViewFirst, "暂无更多", Snackbar.LENGTH_LONG).show();
                         }
 
                     }
@@ -208,7 +209,8 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
             public void onFailure(Call<FoodListModule> call, Throwable t) {
                 recyclerViewFirst.refreshComplete();
                 mLoadingUtils.dismiss();
-                Toast.makeText(mActivity, "连接失败", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mActivity, "连接失败", Toast.LENGTH_SHORT).show();
+                Snackbar.make(recyclerViewFirst, "连接失败", Snackbar.LENGTH_LONG).show();
             }
         });
 

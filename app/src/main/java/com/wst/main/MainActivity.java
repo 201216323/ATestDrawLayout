@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "aaaa", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, "aaaa", Snackbar.LENGTH_LONG)
+                        .show();
             }
         });
         init();
@@ -119,7 +120,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(MainActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
+                Snackbar.make(tabs, "position:"+position, Snackbar.LENGTH_LONG)
+                        .show();
             }
 
             @Override

@@ -110,7 +110,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         fragmentList.add(FoodDetailFragment.newInstance("9"));
 
 
-        vp_main.setOffscreenPageLimit(fragmentList.size());
+        vp_main.setOffscreenPageLimit(3);
         mFoodDetailTabsAdapter = new FoodTabsAdapter(mFragmentManager, mtitles, fragmentList);
         vp_main.setAdapter(mFoodDetailTabsAdapter);
         tabs.setViewPager(vp_main);
@@ -148,7 +148,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<FoodTabModule> call, Response<FoodTabModule> response) {
 
                 FoodTabModule foodTabModule = response.body();
-                if (foodTabModule.isStatus() == true) {
+                if (foodTabModule.isStatus() == true ) {
 
                     for (int i = 0; i < 13; i++) {//
 //                        mtitles.add(foodTabModule.getTngou().get(i).getName());
