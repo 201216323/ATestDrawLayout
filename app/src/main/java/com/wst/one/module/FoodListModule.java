@@ -1,5 +1,6 @@
 package com.wst.one.module;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * Description:
  */
 
-public class FoodListModule {
+public class FoodListModule implements Serializable{
 
     /**
      * status : true
@@ -47,7 +48,7 @@ public class FoodListModule {
         this.tngou = tngou;
     }
 
-    public static class TngouBean {
+    public static class TngouBean implements Serializable{
         /**
          * count : 16874
          * description : 7）加盖，置于蒸锅内，隔水以文火炖2个小时，以表面呈现少量泡沫，有点沸腾、粘稠感和蛋清香味为蒸好的标准

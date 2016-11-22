@@ -22,4 +22,6 @@ public interface FoodService {
     @POST("/api/cook/list")
     Call<FoodListModule> getFoodList(@Field("id") String id, @Field("page") int page, @Field("rows") int rows);
 
+
+
 }

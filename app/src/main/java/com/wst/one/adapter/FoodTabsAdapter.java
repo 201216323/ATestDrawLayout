@@ -21,7 +21,7 @@ public class FoodTabsAdapter extends FragmentStatePagerAdapter {
 
     private ArrayList<String> mtitles;
     private List<Fragment> fragmentList;
-    private int mChildCount;
+
 
     public FoodTabsAdapter(FragmentManager fm, ArrayList<String> mtitles, List<Fragment> fragmentList) {
         super(fm);
@@ -36,7 +36,7 @@ public class FoodTabsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mtitles.size();
+        return fragmentList.size();
     }
 
     @Override
@@ -44,18 +44,4 @@ public class FoodTabsAdapter extends FragmentStatePagerAdapter {
         return mtitles.get(position);
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        mChildCount = getCount();
-        super.notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemPosition(Object object)   {
-        if ( mChildCount > 0) {
-            mChildCount --;
-            return POSITION_NONE;
-        }
-        return super.getItemPosition(object);
-    }
 }

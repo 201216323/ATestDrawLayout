@@ -1,6 +1,7 @@
 package com.wst.one.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -17,8 +19,11 @@ import com.wst.R;
 import com.wst.http.AllURL;
 import com.wst.http.service.FoodService;
 import com.wst.main.MainActivity;
+import com.wst.main.OnRecyclerViewItemClickListener;
+import com.wst.one.FoodDetailActivity;
 import com.wst.one.adapter.FoodListAdapter;
 import com.wst.one.module.FoodListModule;
+import com.wst.util.LoadingUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +55,11 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
     private List<FoodListModule.TngouBean> mData;
     private Handler handler;
     private int page = 1;
-    private int rows = 15;
+    private int rows = 20;
+    @BindView(R.id.imgNoData)
+    ImageView imgNoData;
 
+    LoadingUtils mLoadingUtils;
 
     public static FoodDetailFragment newInstance(String id) {
         FoodDetailFragment fragment = new FoodDetailFragment();
@@ -65,6 +73,7 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (MainActivity) getActivity();
+        mLoadingUtils = new LoadingUtils(context);
     }
 
     @Override
@@ -81,7 +90,8 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_food_detail, container, false);
         ButterKnife.bind(this, view);
         initData();
-        refresh();
+//        refresh();
+        recyclerViewFirst.setRefreshing(true);
         return view;
     }
 
@@ -111,9 +121,9 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void run() {
                         refresh();
-                        recyclerViewFirst.refreshComplete();
+
                     }
-                }, 2000);
+                }, 1000);
             }
 
             @Override
@@ -126,12 +136,19 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
                         loadMore();
                         recyclerViewFirst.loadMoreComplete();
                     }
-                }, 2000);
+                }, 1000);
 
 
             }
         });
-
+        recyclerViewAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, FoodListModule.TngouBean data) {
+                Intent intent = new Intent(mActivity, FoodDetailActivity.class);
+                intent.putExtra("bean", data);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -150,30 +167,48 @@ public class FoodDetailFragment extends Fragment implements View.OnClickListener
     }
 
     private void loadFoodListData(String id) {
+//        mLoadingUtils.show();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AllURL.Server)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         FoodService foodService = retrofit.create(FoodService.class);
-        Call<FoodListModule> foodList = foodService.getFoodList("1", page, rows);
+        final Call<FoodListModule> foodList = foodService.getFoodList(id, page, rows);
         foodList.enqueue(new Callback<FoodListModule>() {
             @Override
             public void onResponse(Call<FoodListModule> call, Response<FoodListModule> response) {
+                recyclerViewFirst.refreshComplete();
                 FoodListModule foodListModule = response.body();
+                mLoadingUtils.dismiss();
+                if (foodListModule != null) {
+                    if (foodListModule.isStatus() == true && foodListModule.getTngou().size() > 0) {
+                        recyclerViewFirst.setVisibility(View.VISIBLE);
+                        imgNoData.setVisibility(View.GONE);
+                        if (foodListModule.getTngou().size() > 0) {
+                            mData.addAll(foodListModule.getTngou());
+                        }
+                        recyclerViewAdapter.notifyDataSetChanged();
+                    } else {
 
-                if (foodListModule.isStatus() == true) {
-                    if (foodListModule.getTngou().size() > 0) {
-                        mData.addAll(foodListModule.getTngou());
+                        if (mData.size() == 0) {
+                            recyclerViewFirst.setVisibility(View.GONE);
+                            imgNoData.setVisibility(View.VISIBLE);
+                        } else {
+                            Toast.makeText(mActivity, "暂无更多", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
-                    recyclerViewAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(mActivity, "接口错误", Toast.LENGTH_SHORT).show();
+                    recyclerViewFirst.setVisibility(View.GONE);
+                    imgNoData.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<FoodListModule> call, Throwable t) {
-
+                recyclerViewFirst.refreshComplete();
+                mLoadingUtils.dismiss();
+                Toast.makeText(mActivity, "连接失败", Toast.LENGTH_SHORT).show();
             }
         });
 

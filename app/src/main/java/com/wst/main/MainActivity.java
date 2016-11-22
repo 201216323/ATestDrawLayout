@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         vp_main.setCurrentItem(MainFragmentAdapter.VIEW_FIRST);
-        tabs.showDot(MainFragmentAdapter.VIEW_FIRST, "99+");
+        tabs.showDot(MainFragmentAdapter.VIEW_FIRST, "0");
     }
 
 }

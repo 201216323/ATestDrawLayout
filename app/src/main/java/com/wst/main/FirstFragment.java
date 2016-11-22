@@ -47,6 +47,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private FragmentManager mFragmentManager;
     private List<Fragment> fragmentList;
 
+
     public static FirstFragment newInstance(String param1, String param2) {
         FirstFragment fragment = new FirstFragment();
         return fragment;
@@ -56,6 +57,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (MainActivity) getActivity();
+
     }
 
     @Override
@@ -64,7 +66,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         ButterKnife.bind(this, view);
         init();
-        loadData();
+
         return view;
     }
 
@@ -78,7 +80,37 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mtitles = new ArrayList<>();
         fragmentList = new ArrayList<Fragment>();
         mFragmentManager = getChildFragmentManager();
-        vp_main.setOffscreenPageLimit(3);
+        mtitles.add("减肥瘦身");
+        fragmentList.add(FoodDetailFragment.newInstance("11"));
+        mtitles.add("私密生活");
+        fragmentList.add(FoodDetailFragment.newInstance("7"));
+        mtitles.add("女性保养");
+        fragmentList.add(FoodDetailFragment.newInstance("5"));
+        mtitles.add("男性健康");
+        fragmentList.add(FoodDetailFragment.newInstance("4"));
+        mtitles.add("孕婴手册");
+        fragmentList.add(FoodDetailFragment.newInstance("6"));
+
+        mtitles.add("夫妻情感");
+        fragmentList.add(FoodDetailFragment.newInstance("13"));
+        mtitles.add("育儿宝典");
+        fragmentList.add(FoodDetailFragment.newInstance("8"));
+        mtitles.add("健康饮食");
+        fragmentList.add(FoodDetailFragment.newInstance("3"));
+        mtitles.add("医疗护理");
+        fragmentList.add(FoodDetailFragment.newInstance("12"));
+        mtitles.add("老人健康");
+        fragmentList.add(FoodDetailFragment.newInstance("1"));
+
+        mtitles.add("孩子健康");
+        fragmentList.add(FoodDetailFragment.newInstance("2"));
+        mtitles.add("四季养生");
+        fragmentList.add(FoodDetailFragment.newInstance("10"));
+        mtitles.add("心里健康");
+        fragmentList.add(FoodDetailFragment.newInstance("9"));
+
+
+        vp_main.setOffscreenPageLimit(fragmentList.size());
         mFoodDetailTabsAdapter = new FoodTabsAdapter(mFragmentManager, mtitles, fragmentList);
         vp_main.setAdapter(mFoodDetailTabsAdapter);
         tabs.setViewPager(vp_main);
@@ -91,7 +123,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(mActivity, "position:" + position + "size:" + mtitles.size(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mActivity, "position:" + position + "size:" + mtitles.size(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -99,10 +131,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-
+//        loadData();
     }
 
+
     private void loadData() {
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AllURL.Server)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -112,10 +146,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         call.enqueue(new Callback<FoodTabModule>() {
             @Override
             public void onResponse(Call<FoodTabModule> call, Response<FoodTabModule> response) {
+
                 FoodTabModule foodTabModule = response.body();
                 if (foodTabModule.isStatus() == true) {
-                    for (int i = 0; i < foodTabModule.getTngou().size(); i++) {
-                        mtitles.add(foodTabModule.getTngou().get(i).getName());
+
+                    for (int i = 0; i < 13; i++) {//
+//                        mtitles.add(foodTabModule.getTngou().get(i).getName());
                         fragmentList.add(FoodDetailFragment.newInstance("" + foodTabModule.getTngou().get(i).getId()));
                     }
                     mFoodDetailTabsAdapter.notifyDataSetChanged();
