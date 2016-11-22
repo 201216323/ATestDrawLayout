@@ -4,11 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.wst.one.fragment.FoodDetailFragment;
-
 import java.util.ArrayList;
-
-import static com.wst.main.MainFragmentAdapter.VIEW_SIZE;
+import java.util.List;
 
 /**
  * Created by: BruceChang
@@ -23,48 +20,42 @@ public class FoodTabsAdapter extends FragmentStatePagerAdapter {
 
 
     private ArrayList<String> mtitles;
+    private List<Fragment> fragmentList;
+    private int mChildCount;
 
-    public FoodTabsAdapter(FragmentManager fm, ArrayList<String> mtitles) {
+    public FoodTabsAdapter(FragmentManager fm, ArrayList<String> mtitles, List<Fragment> fragmentList) {
         super(fm);
         this.mtitles = mtitles;
+        this.fragmentList = fragmentList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                FoodDetailFragment secondFragment0 = FoodDetailFragment.newInstance("", "");
-                return secondFragment0;
-            case 1:
-                FoodDetailFragment secondFragment1 = FoodDetailFragment.newInstance("", "");
-                return secondFragment1;
-            case 2:
-                FoodDetailFragment secondFragment2 = FoodDetailFragment.newInstance("", "");
-                return secondFragment2;
-        }
-        return null;
+        return fragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return mtitles.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position >= 0 && position < VIEW_SIZE) {
-            switch (position) {
-                case 0:
-                    return "张无忌";
-                case 1:
-                    return "范遥";
-                case 2:
-                    return "杨逍";
+        return mtitles.get(position);
+    }
 
-                default:
-                    break;
-            }
+    @Override
+    public void notifyDataSetChanged() {
+        mChildCount = getCount();
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemPosition(Object object)   {
+        if ( mChildCount > 0) {
+            mChildCount --;
+            return POSITION_NONE;
         }
-        return null;
+        return super.getItemPosition(object);
     }
 }

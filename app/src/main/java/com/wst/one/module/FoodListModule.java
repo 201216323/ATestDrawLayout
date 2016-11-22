@@ -11,7 +11,7 @@ import java.util.List;
  * Description:
  */
 
-public class FoodDetailModule {
+public class FoodListModule {
 
     /**
      * status : true

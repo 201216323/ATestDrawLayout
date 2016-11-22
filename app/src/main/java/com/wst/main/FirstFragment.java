@@ -8,15 +8,18 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.lhh.apst.library.AdvancedPagerSlidingTabStrip;
 import com.wst.R;
 import com.wst.http.AllURL;
-import com.wst.http.FoodTabService;
+import com.wst.http.service.FoodTabService;
 import com.wst.one.adapter.FoodTabsAdapter;
+import com.wst.one.fragment.FoodDetailFragment;
 import com.wst.one.module.FoodTabModule;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +28,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.wst.main.MainFragmentAdapter.VIEW_FIRST;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +45,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     ArrayList<String> mtitles;
     FoodTabsAdapter mFoodDetailTabsAdapter;
     private FragmentManager mFragmentManager;
+    private List<Fragment> fragmentList;
 
     public static FirstFragment newInstance(String param1, String param2) {
         FirstFragment fragment = new FirstFragment();
@@ -61,15 +63,42 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         ButterKnife.bind(this, view);
-
-//        loadData();
         init();
+        loadData();
         return view;
     }
 
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    private void init() {
+        mtitles = new ArrayList<>();
+        fragmentList = new ArrayList<Fragment>();
+        mFragmentManager = getChildFragmentManager();
+        vp_main.setOffscreenPageLimit(3);
+        mFoodDetailTabsAdapter = new FoodTabsAdapter(mFragmentManager, mtitles, fragmentList);
+        vp_main.setAdapter(mFoodDetailTabsAdapter);
+        tabs.setViewPager(vp_main);
+        vp_main.setCurrentItem(0);
+        tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Toast.makeText(mActivity, "position:" + position + "size:" + mtitles.size(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -87,44 +116,19 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 if (foodTabModule.isStatus() == true) {
                     for (int i = 0; i < foodTabModule.getTngou().size(); i++) {
                         mtitles.add(foodTabModule.getTngou().get(i).getName());
+                        fragmentList.add(FoodDetailFragment.newInstance("" + foodTabModule.getTngou().get(i).getId()));
                     }
+                    mFoodDetailTabsAdapter.notifyDataSetChanged();
 
                 } else {
-
+                    Toast.makeText(mActivity, "暂无数据", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<FoodTabModule> call, Throwable t) {
-
+                Toast.makeText(mActivity, "连接失败", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void init() {
-        mtitles = new ArrayList<>();
-        mFragmentManager = getChildFragmentManager();
-        vp_main.setOffscreenPageLimit(3);
-        mFoodDetailTabsAdapter = new FoodTabsAdapter(mFragmentManager, mtitles);
-        vp_main.setAdapter(mFoodDetailTabsAdapter);
-        tabs.setViewPager(vp_main);
-        vp_main.setCurrentItem(VIEW_FIRST);
-        tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
     }
 }
