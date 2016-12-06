@@ -28,6 +28,7 @@
         <activity
             android:name=".one.FoodDetailActivity"
             android:screenOrientation="portrait"
+
             />
     </application>
 

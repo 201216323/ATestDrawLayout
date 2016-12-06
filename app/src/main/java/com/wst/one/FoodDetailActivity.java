@@ -1,12 +1,12 @@
 package com.wst.one;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
  */
 
 public class FoodDetailActivity extends AppCompatActivity {
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsing_toolbar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.imgPic)
@@ -54,10 +56,6 @@ public class FoodDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food_detail);
         ButterKnife.bind(this);
 
-        toolbar.setTitle("");
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mIntent = getIntent();
         mTngouBean = (FoodListModule.TngouBean) mIntent.getSerializableExtra("bean");
         img = mTngouBean.getImg();
@@ -65,6 +63,11 @@ public class FoodDetailActivity extends AppCompatActivity {
         food = mTngouBean.getFood();
         keywords = mTngouBean.getKeywords();
         name = mTngouBean.getName();
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        collapsing_toolbar.setTitle(name);
+
         Picasso.with(FoodDetailActivity.this)
                 .load(AllURL.ServerImg2 + img)
                 .into(imgPic);
@@ -73,13 +76,17 @@ public class FoodDetailActivity extends AppCompatActivity {
         tvFoodFood.setText(food);
         tvFoodDesc.setText(description);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 }

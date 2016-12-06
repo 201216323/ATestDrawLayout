@@ -1,1 +1,1 @@
-include ':app' , ':shapeloading'
+include ':app' , ':shapeloading','ninegridview'

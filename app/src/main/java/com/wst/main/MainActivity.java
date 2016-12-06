@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -112,24 +111,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         vp_main.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         tabs.setViewPager(vp_main);
-        tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-//                Toast.makeText(MainActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
-                Snackbar.make(tabs, "position:"+position, Snackbar.LENGTH_LONG)
-                        .show();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+//        tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+////                Toast.makeText(MainActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
+//                Snackbar.make(tabs, "position:"+position, Snackbar.LENGTH_LONG)
+//                        .show();
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
         vp_main.setCurrentItem(MainFragmentAdapter.VIEW_FIRST);
         tabs.showDot(MainFragmentAdapter.VIEW_FIRST, "0");
     }
